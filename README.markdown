@@ -4,12 +4,13 @@ with a 301.
 
 This is really much more sane than the default case-sensitivity.
 
-This basically implemented the "Auto redirect option" from Case sensitivity of page names:
+This implements the "Auto redirect option" from Case sensitivity of page names:
 > Automatically redirect to a page that has same spelling but different
 > capitalization (have the computer do the disambiguation pages when a spelling
 > doesn't match an existing page)
 >
-> Negatives: Performance and possible search engine duplicate content penalties caused by MediaWiki's redirection mechanism.
+> Negatives: Performance and possible search engine duplicate content penalties
+> caused by MediaWiki's redirection mechanism.
 
 My response to that:
 
