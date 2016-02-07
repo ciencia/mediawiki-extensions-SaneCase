@@ -1,6 +1,6 @@
-The SaneCase extension automatic correct case mistakes. For example if Test
-exists, and someone goes to TEST, it will be automatically redirected to Test
-with a 301.
+The SaneCase extension automatic corrects case mistakes. For example if the page
+`Test` exists, and someone goes to `TEST`, they will be automatically redirected
+to `Test` with a 301.
 
 This is really much more sane than the default case-sensitivity.
 
