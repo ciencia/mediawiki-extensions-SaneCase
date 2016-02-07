@@ -1,0 +1,11 @@
+{
+	"name": "SaneCase",
+	"version": "1.0",
+	"author": [
+		"Martin Tournoij"
+	],
+	"description": "Automatically redirect case mistakes",
+	"url": "https://www.mediawiki.org/wiki/Extension:SaneCase",
+	"license-name": "MIT",
+	"manifest_version": 1
+}
