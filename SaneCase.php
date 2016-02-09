@@ -1,7 +1,4 @@
 <?php
-# https://www.mediawiki.org/wiki/Extension:SaneCase
-
-$wgHooks['BeforeDisplayNoArticleText'][] = 'SaneCase::onBeforeDisplayNoArticleText';
 class SaneCase {
 	function onBeforeDisplayNoArticleText($article) {
 		$title = $article->getTitle();
