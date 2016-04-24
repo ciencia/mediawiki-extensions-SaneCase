@@ -11,6 +11,7 @@ to `Test` with a 301.
 This is really much more sane than the default case-sensitivity.
 
 This implements the "Auto redirect option" from Case sensitivity of page names:
+
 > Automatically redirect to a page that has same spelling but different
 > capitalization (have the computer do the disambiguation pages when a spelling
 > doesn't match an existing page)
