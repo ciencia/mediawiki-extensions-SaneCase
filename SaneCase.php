@@ -1,6 +1,6 @@
 <?php
 class SaneCase {
-	function onBeforeDisplayNoArticleText($article) {
+	public static function onBeforeDisplayNoArticleText($article) {
 		$title = $article->getTitle();
 
 		$db = wfGetDB(DB_MASTER);
