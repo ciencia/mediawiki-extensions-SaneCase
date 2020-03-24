@@ -6,7 +6,7 @@ class SaneCase {
 		$db = wfGetDB(DB_MASTER);
 		$r_page = $db->selectRow('page', ['page_id'], [
 			'page_namespace' => $title->mNamespace,
-			'convert(page_title using utf8)' => $title->mDbkeyform,
+			'convert(page_title using utf8mb4)' => $title->mDbkeyform,
 		]);
 
 		if ($r_page) {
