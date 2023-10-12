@@ -1,9 +1,3 @@
-Project status: archived (I no longer work on this, as I don't have a MediaWiki
-install to administer any more. It's still usable, though, and I'll still
-fix bugs when reported; contact me if you want to take over maintainership).
-
------------------------------------------
-
 The SaneCase extension automatic corrects case mistakes. For example if the page
 `Test` exists, and someone goes to `TEST`, they will be automatically redirected
 to `Test` with a 301.

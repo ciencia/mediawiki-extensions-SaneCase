@@ -7,11 +7,16 @@
 	"description": "Automatically redirect case mistakes",
 	"url": "https://www.mediawiki.org/wiki/Extension:SaneCase",
 	"license-name": "MIT",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
 	"AutoloadClasses": {
 		"SaneCase": "SaneCase.php"
 	},
 	"Hooks": {
-		"BeforeDisplayNoArticleText": ["SaneCase::onBeforeDisplayNoArticleText"]
+		"BeforeDisplayNoArticleText": [
+			"SaneCase::onBeforeDisplayNoArticleText"
+		]
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

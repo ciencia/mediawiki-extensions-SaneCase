@@ -1,18 +1,26 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 class SaneCase {
-	public static function onBeforeDisplayNoArticleText($article) {
+	public static function onBeforeDisplayNoArticleText( $article ) {
 		$title = $article->getTitle();
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$dbr = $loadBalancer->getConnectionRef( DB_REPLICA );
 
-		$db = wfGetDB(DB_MASTER);
-		$r_page = $db->selectRow('page', ['page_id'], [
-			'page_namespace' => $title->mNamespace,
-			'convert(page_title using utf8mb4)' => $title->mDbkeyform,
-		]);
+		$pageRow = $dbr->newSelectQueryBuilder()
+			->select( 'page_id' )
+			->from( 'page' )
+			->where( [
+				'page_namespace' => $title->getNamespace(),
+				'convert(page_title using utf8mb4)' => $title->getDBkey(),
+			] )
+			->caller( __METHOD__ )->fetchRow();
 
-		if ($r_page) {
-			$r_title = Title::newFromID($r_page->page_id);
-			header('HTTP/1.1 301 Moved Permanently');
-			header('Location: ' . $r_title->getLocalURL());
+		if ( $pageRow ) {
+			$title = Title::newFromID( $pageRow->page_id );
+			header( 'HTTP/1.1 301 Moved Permanently' );
+			header( 'Location: ' . $title->getLocalURL() );
 		}
 	}
 }
