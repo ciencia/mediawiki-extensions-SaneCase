@@ -6,7 +6,7 @@ class SaneCase {
 	public static function onBeforeDisplayNoArticleText( $article ) {
 		$title = $article->getTitle();
 		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$dbr = $loadBalancer->getConnectionRef( DB_REPLICA );
+		$dbr = $loadBalancer->getConnection( DB_REPLICA );
 
 		$pageRow = $dbr->newSelectQueryBuilder()
 			->select( 'page_id' )
