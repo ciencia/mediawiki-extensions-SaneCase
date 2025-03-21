@@ -1,6 +1,6 @@
 {
 	"name": "SaneCase",
-	"version": "2.0",
+	"version": "3.0",
 	"author": [
 		"Martin Tournoij"
 	],
@@ -13,10 +13,19 @@
 	"AutoloadClasses": {
 		"SaneCase": "SaneCase.php"
 	},
+	"ConfigRegistry": {
+		"sanecase": "GlobalVarConfig::newInstance"
+	},
 	"Hooks": {
 		"BeforeDisplayNoArticleText": [
 			"SaneCase::onBeforeDisplayNoArticleText"
 		]
+	},
+	"config": {
+		"SaneCaseAutofixSpecialCharBreak": {
+			"value": false,
+			"description": "Tries to fix automatically cut URLs at the presence of special characters."
+		}
 	},
 	"manifest_version": 2
 }
