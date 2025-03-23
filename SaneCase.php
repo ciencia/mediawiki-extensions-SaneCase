@@ -8,9 +8,8 @@ class SaneCase {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'sanecase' );
 		$originalLength = mb_strlen( $title->getDBkey() );
 		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$tryAutoFixSpecialCharBreak = $config->get( 'SaneCaseAutofixSpecialCharBreak' );
 		$dbr = $loadBalancer->getConnection( DB_REPLICA );
-		if ( $tryAutoFixSpecialCharBreak ) {
+		if ( $config->get( 'SaneCaseAutofixSpecialCharBreak' ) ) {
 			// Get chances to find one page with a special character matching, there may be several results that don't match the criteria
 			// while not getting a large result set
 			$limit = 20;
@@ -32,12 +31,14 @@ class SaneCase {
 
 		$found = false;
 		foreach ( $res as $row ) {
-			if ( !$tryAutoFixSpecialCharBreak ) {
+			if ( mb_strtolower( $row->page_title ) == mb_strtolower( $title->getDBkey() ) ) {
+				// case-insensitive match
 				$found = true;
 			} else if (
 				mb_strlen( $row->page_title ) > $originalLength &&
 				preg_match( '/^_*[^a-zA-Z0-9-_~$]/', mb_substr( $row->page_title, $originalLength ) )
 			) {
+				// prefix match
 				// the next character is a special one (not plain ascii "word" or safe punctuation)
 				// optionally prefixed by a space (underscore in db), since MW trims spaces at the end
 				$found = true;
