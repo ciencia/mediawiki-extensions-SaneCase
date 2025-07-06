@@ -8,7 +8,7 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:SaneCase",
 	"license-name": "MIT",
 	"requires": {
-		"MediaWiki": ">= 1.39.0"
+		"MediaWiki": ">= 1.40.0"
 	},
 	"AutoloadClasses": {
 		"SaneCase": "SaneCase.php"
