@@ -1,15 +1,26 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Config\ConfigFactory;
+use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Title\Title;
+use Wikimedia\Rdbms\ILoadBalancer;
 
-class SaneCase {
-	public static function onBeforeDisplayNoArticleText( $article ) {
+class SaneCase implements BeforeDisplayNoArticleTextHook {
+
+	private ConfigFactory $configFactory;
+	private ILoadBalancer $loadBalancer;
+
+	public function __construct( ConfigFactory $configFactory, ILoadBalancer $loadBalancer ) {
+		$this->configFactory = $configFactory;
+		$this->loadBalancer = $loadBalancer;
+	}
+
+	public function onBeforeDisplayNoArticleText( $article ): void {
 		$title = $article->getTitle();
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'sanecase' );
+		$config = $this->configFactory->makeConfig( 'sanecase' );
+
 		$originalLength = mb_strlen( $title->getDBkey() );
-		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$dbr = $loadBalancer->getConnection( DB_REPLICA );
+		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 		if ( $config->get( 'SaneCaseAutofixSpecialCharBreak' ) ) {
 			// Get chances to find one page with a special character matching, there may be several results that don't match the criteria
 			// while not getting a large result set

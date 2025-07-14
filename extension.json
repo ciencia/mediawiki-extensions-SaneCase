@@ -9,7 +9,7 @@
 	"license-name": "MIT",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.40.0"
+		"MediaWiki": ">= 1.41.0"
 	},
 	"AutoloadClasses": {
 		"SaneCase": "SaneCase.php"
@@ -17,10 +17,17 @@
 	"ConfigRegistry": {
 		"sanecase": "GlobalVarConfig::newInstance"
 	},
+	"HookHandlers": {
+		"SaneCaseHooks": {
+			"class": "SaneCase",
+			"services": [
+				"ConfigFactory",
+				"DBLoadBalancer"
+			]
+		}
+	},
 	"Hooks": {
-		"BeforeDisplayNoArticleText": [
-			"SaneCase::onBeforeDisplayNoArticleText"
-		]
+		"BeforeDisplayNoArticleText": "SaneCaseHooks"
 	},
 	"config": {
 		"SaneCaseAutofixSpecialCharBreak": {
