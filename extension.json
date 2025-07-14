@@ -7,6 +7,7 @@
 	"description": "Automatically redirect case mistakes",
 	"url": "https://www.mediawiki.org/wiki/Extension:SaneCase",
 	"license-name": "MIT",
+	"type": "other",
 	"requires": {
 		"MediaWiki": ">= 1.40.0"
 	},
