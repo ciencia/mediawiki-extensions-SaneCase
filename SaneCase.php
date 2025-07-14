@@ -21,6 +21,7 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 
 		$originalLength = mb_strlen( $title->getDBkey() );
 		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
+		
 		if ( $config->get( 'SaneCaseAutofixSpecialCharBreak' ) ) {
 			// Get chances to find one page with a special character matching, there may be several results that don't match the criteria
 			// while not getting a large result set
@@ -31,6 +32,7 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 			$limit = 1;
 			$titleCond = [ 'convert(page_title using utf8mb4)' => $title->getDBkey() ];
 		}
+
 		// Get a list of pages which prefix matches the title
 		$res = $dbr->newSelectQueryBuilder()
 			->select( [ 'page_title', 'page_id' ] )
@@ -63,4 +65,5 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 			}
 		}
 	}
+
 }
