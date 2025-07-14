@@ -43,7 +43,7 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 
 		$found = false;
 		foreach ( $res as $row ) {
-			if ( mb_strtolower( $row->page_title ) == mb_strtolower( $title->getDBkey() ) ) {
+			if ( mb_strtolower( $row->page_title ) === mb_strtolower( $title->getDBkey() ) ) {
 				// case-insensitive match
 				$found = true;
 			} else if (
