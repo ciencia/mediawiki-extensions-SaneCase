@@ -15,7 +15,7 @@
 		"SaneCase": "SaneCase.php"
 	},
 	"ConfigRegistry": {
-		"sanecase": "GlobalVarConfig::newInstance"
+		"sanecase": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"HookHandlers": {
 		"SaneCaseHooks": {
