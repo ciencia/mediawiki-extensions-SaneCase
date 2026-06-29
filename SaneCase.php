@@ -2,6 +2,7 @@
 
 use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
+use MediaWiki\Rest\RequestFromGlobals;
 use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -59,7 +60,9 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 			}
 			if ( $found ) {
 				$title = Title::newFromID( $row->page_id );
-				header( 'HTTP/1.1 301 Moved Permanently' );
+				$reqFromGlobals = new RequestFromGlobals();
+				$ver = $reqFromGlobals->getProtocolVersion();
+				header( "HTTP/$ver 301 Moved Permanently" );
 				header( 'Location: ' . $title->getLocalURL() );
 				return;
 			}
