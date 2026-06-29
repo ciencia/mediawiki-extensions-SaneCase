@@ -64,6 +64,7 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 				$ver = $reqFromGlobals->getProtocolVersion();
 				header( "HTTP/$ver 301 Moved Permanently" );
 				header( 'Location: ' . $title->getLocalURL() );
+				header( 'X-Redirect-By: MediaWiki/SaneCase' );
 				return;
 			}
 		}
