@@ -50,7 +50,7 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 				$found = true;
 			} else if (
 				mb_strlen( $row->page_title ) > $originalLength &&
-				preg_match( '/^_*[^a-zA-Z0-9-_~$]/', mb_substr( $row->page_title, $originalLength ) )
+				preg_match( '#^_*[^a-zA-Z0-9-_~$/]#', mb_substr( $row->page_title, $originalLength ) )
 			) {
 				// prefix match
 				// the next character is a special one (not plain ascii "word" or safe punctuation)
