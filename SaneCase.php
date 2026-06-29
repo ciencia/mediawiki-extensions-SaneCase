@@ -20,6 +20,11 @@ class SaneCase implements BeforeDisplayNoArticleTextHook {
 		$title = $article->getTitle();
 		$config = $this->configFactory->makeConfig( 'sanecase' );
 
+		if ( $article->getContext()->getRequest()->getRawVal( 'redirect' ) === 'no' ) {
+			// Skip if we're told to not redirect, just like normal redirects
+			return;
+		}
+
 		$originalLength = mb_strlen( $title->getDBkey() );
 		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 		
